@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = "logstash-codec-bytes"
-  s.version       = "0.1.0"
+  s.version       = "1.0.0"
   s.authors       = ["Lob"]
   s.description   = "Logstash codec plugin to chunk an input into parts of a specified number of bytes"
   s.summary       = "Logstash codec plugin to chunk an input into parts of a specified number of bytes"
