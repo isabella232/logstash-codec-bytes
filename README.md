@@ -1,24 +1,21 @@
 # logstash-codec-bytes
 
-Logstash filter plugin to chunk an input into parts of a specified number of bytes.
+Logstash codec plugin to chunk an input into an event every specified number of bytes.
 
-## Developing
+## About
 
-### 1. Plugin Development and Testing
+This is a plugin for [Logstash](https://github.com/elastic/logstash).
+
+It is fully free and fully open source. The license is MIT, meaning you are pretty much free to use it however you want in whatever way.
+
+### Installation
 
 #### Code
-
 - To get started, you'll need JRuby with the Bundler gem installed.
 
-```sh
-$ rvm install jruby
-$ gem install bundler
-```
-
 - Install dependencies
-
 ```sh
-$ bundle install
+bundle install
 ```
 
 #### Test
@@ -35,44 +32,43 @@ $ bundle install
 $ bundle exec rspec
 ```
 
-### 2. Running your unpublished Plugin in Logstash
+### Running the Plugin in Logstash (version 2.3.x)
 
-#### 2.1 Run in a local Logstash clone
-
-- Edit Logstash `Gemfile` and add the local plugin path, for example:
-
-```ruby
-gem "logstash-codec-bytes", :path => "/your/local/logstash-codec-bytes"
-```
-
-- Install plugin
+- Install the plugin
 
 ```sh
-bin/plugin install --no-verify
+bin/logstash-plugin install logstash-codec-bytes
 ```
 
-- Run Logstash with your plugin
+- Run Logstash with the plugin
 
 ```sh
-bin/logstash -e 'input { file { delimiter => "" codec => bytes { length => X } } }'
+bin/logstash -e 'input { file { path => "/path/to/file" delimiter => "" codec => bytes { length => X } } }'
 ```
+where length X is the number of bytes you want to read before emitting an event.
 
-At this point any modifications to the plugin code will be applied to this local Logstash setup. After modifying the plugin, simply rerun Logstash.
+Note: we recommend sending smaller, more frequent events into the bytes codec for the best performance. With the file input plugin above, we set the delimiter to "" because otherwise it defaults to emitting an event every \n character. If a file were only one line, the entire file would be fed into the bytes codec, leading to reduced performance.
 
-#### 2.2 Run in an installed Logstash
+## Contributing
 
-You can use the same **2.1** method to run your plugin in an installed Logstash by editing its `Gemfile` and pointing the `:path` to your local plugin development directory or you can build the gem and install it using:
+Make sure you have JRuby and Bundler installed. Copy and paste the following commands in your projects directory.
 
-- Build your plugin gem
+    git clone https://github.com/lob/logstash-codec-bytes.git
+    cd logstash-codec-bytes
+    bundle install
 
-```sh
-gem build logstash-codec-bytes.gemspec
-```
+### Contributing Instructions
 
-- Install the plugin from the Logstash home
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Make sure the tests pass
+6. Open up coverage/index.html in your browser and add tests if required
+7. Create new Pull Request
 
-```sh
-bin/plugin install /your/local/plugin/logstash-codec-bytes.gem
-```
+=======================
 
-- Start Logstash and proceed to test the plugin
+Copyright &copy; 2016 Lob.com
+
+Released under the MIT License, which can be found in the repository in `LICENSE`.
