@@ -1,9 +1,0 @@
-general:
-  artifacts:
-    - ~/coverage.tar
-
-test:
-  override:
-    - JRUBY_OPTS="--debug" bundle exec rspec
-  post:
-    - rm -rf $CIRCLE_ARTIFACTS/* && tar cvf ~/coverage.tar coverage
