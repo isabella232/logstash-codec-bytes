@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "logstash-core", ">= 2.0.0", "< 3.0.0"
 
   s.add_development_dependency "logstash-devutils"
+  s.add_development_dependency "coveralls", "~> 0.8.1"
   s.add_development_dependency "simplecov"
 end

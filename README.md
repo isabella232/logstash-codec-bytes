@@ -1,5 +1,9 @@
 # logstash-codec-bytes
 
+[![Build Status](https://travis-ci.org/lob/logstash-codec-bytes.svg?branch=master)](https://travis-ci.org/lob/logstash-codec-bytes)
+[![Gem Version](https://badge.fury.io/rb/logstash-codec-bytes.svg)](http://badge.fury.io/rb/logstash-codec-bytes)
+[![Coverage Status](https://coveralls.io/repos/github/lob/logstash-codec-bytes/badge.svg?branch=master)](https://coveralls.io/github/lob/logstash-codec-bytes?branch=master)
+
 Logstash codec plugin to chunk an input into an event every specified number of bytes.
 
 ## About
