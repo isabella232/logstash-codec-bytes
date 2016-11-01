@@ -11,14 +11,14 @@ describe LogStash::Codecs::Bytes do
     data = "TestTest"
 
     subject.decode(data) do |event|
-      expect(event["message"].length).to eq(subject.length)
+      expect(event.get("message").length).to eq(subject.length)
     end
 
   end
 
   it "creates an event for each complete chunk" do
     data = "TestTes"
-    expected_count = data.bytes.length / subject.length
+    expected_count = data.bytes.count / subject.length
     count = 0
 
     subject.decode(data) { count += 1 }

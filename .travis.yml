@@ -2,7 +2,8 @@ sudo: false
 language: ruby
 cache: bundler
 rvm:
-  - jruby-9.0.5.0
+  - jruby-1.7.25
+jdk: oraclejdk8
 env:
   JRUBY_OPTS="--debug"
 script: bundle exec rspec
