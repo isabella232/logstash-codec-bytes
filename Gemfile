@@ -1,3 +1,3 @@
-#ruby=jruby-9.0.5.0
+#ruby=jruby-1.7.25
 source 'https://rubygems.org'
 gemspec
