@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = "logstash-codec-bytes"
-  s.version       = "1.0.0"
+  s.version       = "2.0.0"
   s.licenses      = ["MIT"]
   s.authors       = ["Lob"]
   s.email         = ["support@lob.com"]
