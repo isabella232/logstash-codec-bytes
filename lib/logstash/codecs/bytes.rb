@@ -22,17 +22,27 @@ class LogStash::Codecs::Bytes < LogStash::Codecs::Base
 
   public
   def register
-    @payload = []
+    @payload = ""
   end
 
   public
   def decode(data)
-    @payload += data.bytes.to_a
+    @payload << data
 
-    while @payload.length >= @length
-      line = @payload.slice!(0...@length).pack('c*')
+    payload_size = @payload.bytesize
+    count        = payload_size / @length
+    byte_offset  = 0
 
-      yield LogStash::Event.new({ "message" => line })
+    lines    = @payload.byteslice(0...count * @length)
+    @payload = @payload.byteslice(count * @length...payload_size)
+
+    while count > 0
+      yield LogStash::Event.new({
+        "message" => lines.byteslice(byte_offset...byte_offset + @length)
+      })
+
+      count -= 1
+      byte_offset += @length
     end
 
   end
